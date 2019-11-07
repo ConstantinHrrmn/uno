@@ -1,0 +1,11 @@
+C:\Users\Constantin\source\repos\uno_game\uno_game\bin\Debug\uno_game.exe.config
+C:\Users\Constantin\source\repos\uno_game\uno_game\bin\Debug\uno_game.exe
+C:\Users\Constantin\source\repos\uno_game\uno_game\bin\Debug\uno_game.pdb
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.csprojAssemblyReference.cache
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.GameFrame.resources
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.Properties.Resources.resources
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.csproj.GenerateResource.cache
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.exe
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.pdb
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.StartingPage.resources
+C:\Users\Constantin\source\repos\uno_game\uno_game\obj\Debug\uno_game.ColorChooser.resources
