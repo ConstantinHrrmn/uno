@@ -13,6 +13,8 @@ namespace uno_game
         private List<Card> _stack;
         private GameFrame _gF;
 
+        private Move _lastMove = new Move();
+
         private int plusToGiveToNextPlayer = 0;
 
         const int CARDS_TO_GIVE_AT_BEGINNING = 7;
@@ -130,24 +132,59 @@ namespace uno_game
             this.GF.DisplayPlayer(this.ActualPlayer);
         }
 
+        public bool CanIPlay()
+        {
+            bool returnValue = false;
+
+            foreach (Card card in this.ActualPlayer.Cards)
+            {
+                if (unoRules.isMovePossible(this.Stack.Last(), card))
+                {
+                    returnValue = true;
+                }
+
+                if ()
+                {
+
+                }
+            }
+
+            return returnValue;
+        }
+
         public void PickACard()
         {
+            this.LastMove.Usefull = false;
+
             if (this.plusToGiveToNextPlayer == 0)
             {
                 this.GiveCardsToPlayer(1, this.ActualPlayer);
+                this.LastMove.Usefull = true;
+                if (!this.CanIPlay())
+                {
+                    this.NextPlayer();
+                }
             }
             else
             {
                 this.GiveCardsToPlayer(plusToGiveToNextPlayer, this.ActualPlayer);
                 this.plusToGiveToNextPlayer = 0;
                 this.GF.ChangePlusLabel(plusToGiveToNextPlayer.ToString());
+                this.LastMove.Usefull = true;
+                if (!this.CanIPlay())
+                {
+                    this.NextPlayer();
+                }
             }
+
+            
+            //this.LastMove.SaveMove();
             
             if (this.ActualPlayer.Cards.Count > 22)
             {
                 if (this.ActualPlayer is IA)
                 {
-                    NextPlayer();
+                    this.NextPlayer();
                 }
                 else
                 {
@@ -159,7 +196,7 @@ namespace uno_game
             {
                 if (this.ActualPlayer is IA)
                 {
-
+                    this.NextPlayer();
                 }
                 else
                 {
@@ -174,6 +211,10 @@ namespace uno_game
         {
             if (unoRules.isMovePossible(this.Stack.Last(), c))
             {
+                this.LastMove.Usefull = false;
+                this.LastMove.DeckCard = this.Stack.Last();
+                this.LastMove.PlayCard = c;
+
                 this.Stack.Add(c);
                 this.GF.UpdateMainStack(this.Stack.Last());
 
@@ -181,6 +222,8 @@ namespace uno_game
 
                 this.ActualPlayer.Cards.Remove(c);
                 this.GF.DisplayPlayer(this.ActualPlayer);
+
+                this.NextPlayer();
             }
             else
             {
@@ -197,6 +240,7 @@ namespace uno_game
             else if(c.isChangementSens())
             {
                 this.Players.Reverse();
+                this.NextPlayer();
             }
             else if (c.isPlus2())
             {
@@ -217,6 +261,8 @@ namespace uno_game
 
         public void NextPlayer()
         {
+            Console.WriteLine(this.LastMove.ToString());
+
             int index = this.Players.IndexOf(this.ActualPlayer);
             index++;
 
@@ -224,6 +270,21 @@ namespace uno_game
                 index = 0;
 
             this.ActualPlayer = this.Players[index];
+
+            if (this.Stack.Last().isPlus4())
+            {
+                this.PickACard();
+            }
+
+            if (this.Stack.Last().isSauterTour())
+            {
+                this.NextPlayer();
+            }
+        }
+
+        public Card GetCardOnStack()
+        {
+            return this.Stack.Last();
         }
 
         internal List<Card> Deck { get => _deck; set => _deck = value; }
@@ -231,6 +292,7 @@ namespace uno_game
         public List<Card> Stack { get => _stack; set => _stack = value; }
         public GameFrame GF { get => _gF; set => _gF = value; }
         public Player ActualPlayer { get => _actualPlayer; set => _actualPlayer = value; }
+        internal Move LastMove { get => _lastMove; set => _lastMove = value; }
     }
 }
  
