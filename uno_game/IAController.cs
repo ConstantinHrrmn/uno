@@ -24,8 +24,8 @@ namespace uno_game
             SqlParameter cardOnstackParam = cm.Parameters.AddWithValue("@cardonstack", cardOnDeck.Number);
             SqlParameter playedCardParam = cm.Parameters.AddWithValue("@cardplayed", playedCard.Number);
             SqlParameter usefullParam = cm.Parameters.AddWithValue("@usefull", useFull);
-            SqlParameter colorCardOnstackParam = cm.Parameters.AddWithValue("@colorsonstack", cardOnDeck.Color);
-            SqlParameter ColorCardPlayerParam = cm.Parameters.AddWithValue("@colorscardplayer", playedCard.Color);
+            SqlParameter colorCardOnstackParam = cm.Parameters.AddWithValue("@colorsonstack", cardOnDeck.Color.ToString());
+            SqlParameter ColorCardPlayerParam = cm.Parameters.AddWithValue("@colorscardplayer", playedCard.Color.ToString());
 
             cn.Open();
             cm.ExecuteNonQuery();

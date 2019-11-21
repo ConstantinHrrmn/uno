@@ -142,11 +142,6 @@ namespace uno_game
                 {
                     returnValue = true;
                 }
-
-                if ()
-                {
-
-                }
             }
 
             return returnValue;
@@ -259,9 +254,28 @@ namespace uno_game
             }
         }
 
+        public bool CanRepost()
+        {
+            bool returnvalue = false;
+
+            foreach (Card item in this.ActualPlayer.Cards)
+            {
+                if (this.GetCardOnStack().isPlus2() && item.isPlus2())
+                {
+                    returnvalue = true;
+                }
+                else if(this.GetCardOnStack().isPlus4() && item.isPlus4())
+                {
+                    returnvalue = true;
+                }
+            }
+
+            return returnvalue;
+        }
+
         public void NextPlayer()
         {
-            Console.WriteLine(this.LastMove.ToString());
+            //Console.WriteLine(this.LastMove.ToString());
 
             int index = this.Players.IndexOf(this.ActualPlayer);
             index++;
@@ -279,6 +293,14 @@ namespace uno_game
             if (this.Stack.Last().isSauterTour())
             {
                 this.NextPlayer();
+            }
+
+            if (this.GetCardOnStack().isPlus2() || this.GetCardOnStack().isPlus4())
+            {
+                if (!this.CanRepost())
+                {
+                    this.GiveCardsToPlayer(this.plusToGiveToNextPlayer, this.ActualPlayer);
+                }
             }
         }
 
