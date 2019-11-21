@@ -38,12 +38,12 @@ namespace uno_game
             if (st.ShowDialog() == DialogResult.Cancel)
                 this.Close();
 
-            Console.WriteLine(this.Ctrl.ShowPlayers());
+            this.Ctrl.DebugPlayers();
 
             this.pbMainStack.Location = new Point(this.Bounds.Width / 2 - this.pbMainStack.Width / 2, this.pbMainStack.Location.Y);
 
-            this.Ctrl.PutFirstCard();
-            this.Ctrl.DisplayPlayer();
+            this.Ctrl.PutFirstCardOnStack();
+            //this.Ctrl.DisplayPlayer();
         }
 
         public void DisplayPlayer(Player p)
@@ -126,12 +126,12 @@ namespace uno_game
 
             Card c = pb.Tag as Card;
 
-            this.Ctrl.PlayACard(c);
+            this.Ctrl.PlayThisCard(c);
         }
 
         private void PbPicDeck_Click(object sender, EventArgs e)
         {
-            this.Ctrl.PickACard();
+            this.Ctrl.PickACard(1);
         }
 
         public void ShowMessage(string message)
@@ -139,9 +139,9 @@ namespace uno_game
             MessageBox.Show(message);
         }
 
-        public void ChangePlusLabel(string text)
+        public void ChangePlusLabel(int amount)
         {
-            this.lblPlus.Text = text;
+            this.lblPlus.Text = "+" + amount.ToString();
         }
 
         public Color ShowColorChooser()
@@ -173,6 +173,19 @@ namespace uno_game
             }
 
             return c;
+        }
+
+        public void ChangeChoosenColor(Color c)
+        {
+            if (c == null)
+            {
+                this.ChoosenColor.BackColor = this.BackColor;
+            }
+            else
+            {
+                this.ChoosenColor.BackColor = c;
+            }
+            
         }
     }
 }

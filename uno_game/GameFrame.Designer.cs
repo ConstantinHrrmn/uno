@@ -31,6 +31,7 @@
             this.pbMainStack = new System.Windows.Forms.PictureBox();
             this.pbPicDeck = new System.Windows.Forms.PictureBox();
             this.lblPlus = new System.Windows.Forms.Label();
+            this.ChoosenColor = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbMainStack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicDeck)).BeginInit();
             this.SuspendLayout();
@@ -67,12 +68,20 @@
             this.lblPlus.TabIndex = 2;
             this.lblPlus.Text = "0";
             // 
+            // ChoosenColor
+            // 
+            this.ChoosenColor.Location = new System.Drawing.Point(627, 149);
+            this.ChoosenColor.Name = "ChoosenColor";
+            this.ChoosenColor.Size = new System.Drawing.Size(182, 34);
+            this.ChoosenColor.TabIndex = 3;
+            // 
             // GameFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(1450, 912);
+            this.Controls.Add(this.ChoosenColor);
             this.Controls.Add(this.lblPlus);
             this.Controls.Add(this.pbPicDeck);
             this.Controls.Add(this.pbMainStack);
@@ -95,6 +104,7 @@
         private System.Windows.Forms.PictureBox pbMainStack;
         private System.Windows.Forms.PictureBox pbPicDeck;
         private System.Windows.Forms.Label lblPlus;
+        private System.Windows.Forms.Panel ChoosenColor;
     }
 }
 

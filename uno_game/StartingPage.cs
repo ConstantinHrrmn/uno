@@ -47,16 +47,8 @@ namespace uno_game
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
-        {
-            List<string> names = new List<string>();
-            names.Add("Player");
-
-            for (int i = 0; i < nudIA.Value; i++)
-            {
-                names.Add("IA" + i);
-            } 
-
-            gf.Ctrl.CreatePlayers(names);
+        {        
+            gf.Ctrl.CreatePlayers(Convert.ToInt32(nudIA.Value));
 
             this.DialogResult = DialogResult.OK;
             
