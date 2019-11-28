@@ -76,14 +76,11 @@
     <Compile Include="GameFrame.Designer.cs">
       <DependentUpon>GameFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="IA.cs" />
-    <Compile Include="IAController.cs" />
     <Compile Include="ModelDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Move.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -307,15 +304,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\uno.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Database.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Database.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

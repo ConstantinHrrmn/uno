@@ -47,8 +47,8 @@ namespace uno_game
             this.Players.Add(new Player("Player"));
 
             // Creating all the IA's
-            for (int i = 0; i < IA_amount; i++)
-                this.Players.Add(new IA("IA " + i));
+            //for (int i = 0; i < IA_amount; i++)
+               // this.Players.Add(new IA("IA " + i));
 
             // Make the real player as the first player
             this.ActualPlayer = this.Players.First();
@@ -194,7 +194,17 @@ namespace uno_game
         {
             if (this.ActualPlayer.Cards.Count < 22)
             {
-                this.GiveCardsToPlayer(amount, this.ActualPlayer);
+                if (this.plusToGiveToNextPlayer > 0)
+                {
+                    this.GiveCardsToPlayer(this.plusToGiveToNextPlayer, this.ActualPlayer);
+                    this.plusToGiveToNextPlayer = 0;
+                    this.GF.ChangePlusLabel(this.plusToGiveToNextPlayer);
+                }
+                else
+                {
+                    this.GiveCardsToPlayer(amount, this.ActualPlayer);
+                }
+                
                 this.GF.DisplayPlayer(this.ActualPlayer);
                 if (!CanIPlay())
                 {

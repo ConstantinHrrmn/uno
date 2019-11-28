@@ -20,5 +20,3 @@ C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.StartingPag
 C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.csproj.GenerateResource.cache
 C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.exe
 C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.pdb
-C:\Users\Constantin\Documents\GitHub\uno\uno_game\bin\Debug\Database.mdf
-C:\Users\Constantin\Documents\GitHub\uno\uno_game\bin\Debug\Database_log.ldf
