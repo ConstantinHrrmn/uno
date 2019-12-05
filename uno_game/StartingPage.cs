@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,58 +21,28 @@ namespace uno_game
         private List<TextBox> ltb = new List<TextBox>();
         private GameFrame gf;
 
+
         public StartingPage(GameFrame a_gf)
         {
             InitializeComponent();
             gf = a_gf;
-        }
 
-        private void BtnAddPlayer_Click(object sender, EventArgs e)
-        {
-            if (playerCount < 5)
-            {
-                playerCount++;
-                Point newPosition = new Point(this.basePositionTbx.X, this.basePositionTbx.Y + (this.playerCount * this.baseSizeTbx.Height) + (this.playerCount * 10));
-                this.CreateTexbox(this.baseSizeTbx, newPosition, this.playerCount);
-            }
+            this.lblIp.Text = "Your IP: " + this.gf.Ctrl.GetLocalIp();
 
-            this.VerifyButon();
-            
         }
 
         private void VerifyButon()
         {
-            if (playerCount >= 5)
-            {
-                //this.btnAddPlayer.Enabled = false;
-            }
+
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
         {        
-            gf.Ctrl.CreatePlayers(Convert.ToInt32(nudIA.Value));
 
-            this.DialogResult = DialogResult.OK;
-            
-            this.Close();
-
-        }
-
-        private void CreateTexbox(Size s, Point p, int index)
-        {
-            TextBox tbx = new TextBox();
-            tbx.Text = "Nom du joueur " + index;
-            tbx.Name = "NewPlayer" + index;
-            tbx.Size = s;
-            tbx.Location = p;
-            tbx.Click += tbx_click;
-            this.Controls.Add(tbx);
-            this.ltb.Add(tbx);
         }
 
         private void StartingPage_Load(object sender, EventArgs e)
         {
-            //this.btnAddPlayer.PerformClick();
         }
 
         private void PbTitle_Click(object sender, EventArgs e)
@@ -82,6 +54,29 @@ namespace uno_game
         {
             TextBox tbx = sender as TextBox;
             tbx.SelectAll();
+        }
+
+        private void btnCreateServer_Click(object sender, EventArgs e)
+        {
+            this.gf.Ctrl.CreateServer();
+
+            gf.Ctrl.CreatePlayers(0);
+
+            this.DialogResult = DialogResult.OK;
+
+            this.Close();
+        }
+
+        private void btnConnectServer_Click(object sender, EventArgs e)
+        {
+            this.gf.Ctrl.Connect(this.tbxip.Text, "newPlayer;Computer 1;"+this.gf.Ctrl.GetLocalIp());
+            this.gf.Ctrl.CreateServer();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.label1.Text = this.gf.Ctrl.GetInfos(this.tbxip.Text, this.gf.Ctrl.GetLocalIp());
+
         }
     }
 }

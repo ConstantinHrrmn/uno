@@ -10,14 +10,17 @@ namespace uno_game
     {
         private string _name;
         private List<Card> _cards;
+        private string _iP;
 
-        public Player(string a_name)
+        public Player(string a_name, string ip)
         {
             this.Name = a_name;
+            this.IP = ip;
             this.Cards = new List<Card>();
         }
 
         public string Name { get => _name; set => _name = value; }
+        public string IP { get => _iP; set => _iP = value; }
         internal List<Card> Cards { get => _cards; set => _cards = value; }
 
         public override string ToString()
