@@ -21,3 +21,4 @@ C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.csproj.Gene
 C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.exe
 C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.pdb
 C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.DebugForm.resources
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Debug\uno_game.Logging.resources

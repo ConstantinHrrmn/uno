@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace uno_game
 {
@@ -37,6 +38,11 @@ namespace uno_game
             this.Players = new List<Player>();
 
             this.GF = a_gf;
+        }
+
+        public Controller()
+        {
+
         }
 
         #region PLAYER MANAGEMENT
@@ -305,6 +311,11 @@ namespace uno_game
             return canpPlay;
         }
 
+        public int PlusToGiveToNextlayer()
+        {
+            return this.plusToGiveToNextPlayer;
+        }
+
         #endregion
 
         #region DEBUGGING
@@ -382,7 +393,7 @@ namespace uno_game
             }).Start();
         }
 
-        public string GetInfos(string server, string clientIp)
+        public string GetInfos(string server, string clientIp, string message)
         {
             try
             {
@@ -391,14 +402,14 @@ namespace uno_game
                 NetworkStream stream = client.GetStream();
 
                 // Translate the Message into ASCII.
-                Byte[] data = System.Text.Encoding.ASCII.GetBytes("infos");
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
-                Console.WriteLine("Sent: {0}", "infos");
+                Console.WriteLine("Sent: {0}", message);
 
                 // Bytes Array to receive Server Response.
-                data = new Byte[256];
+                data = new Byte[1000];
                 String response = String.Empty;
                 // Read the Tcp Server Response Bytes.
                 Int32 bytes = stream.Read(data, 0, data.Length);
@@ -426,7 +437,10 @@ namespace uno_game
         internal List<Card> Deck { get => _deck; set => _deck = value; }
         internal List<Player> Players { get => _players; set => _players = value; }
         public List<Card> Stack { get => _stack; set => _stack = value; }
+
+        [XmlIgnore]
         public GameFrame GF { get => _gF; set => _gF = value; }
+
         public Player ActualPlayer { get => _actualPlayer; set => _actualPlayer = value; }
         internal Server Serv { get => _serv; set => _serv = value; }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using uno_game;
@@ -68,8 +70,31 @@ class Server
                         this.ctrl.CreatePlayer(words[1], words[2]);
                         str = "Welcome to the game " + words[1];
                         break;
-                    case "infos":
+                    case "Players":
                         str = "Test ok";
+                        str = Serial.Serialize(this.ctrl.Players);
+                        break;
+                    case "Deck":
+                        str = Serial.Serialize(this.ctrl.Deck);
+                        break;
+                    case "Stack":
+                        str = Serial.Serialize(this.ctrl.Stack);
+                        break;
+                    case "Player":
+                        str = Serial.Serialize(this.ctrl.ActualPlayer);
+                        break;
+                    case "PlusToGive":
+                        str = Serial.Serialize(this.ctrl.PlusToGiveToNextlayer());
+                        break;
+                    case "infos":
+                        str = Serial.Serialize(this.ctrl.Players);
+                        str += Serial.Serialize(this.ctrl.Deck);
+                        str += Serial.Serialize(this.ctrl.Stack);
+                        str += Serial.Serialize(this.ctrl.ActualPlayer);
+                        str += Serial.Serialize(this.ctrl.PlusToGiveToNextlayer());
+                        break;
+                    case "Controller":
+                        str = Serial.Serialize(this.ctrl);
                         break;
                 }
 

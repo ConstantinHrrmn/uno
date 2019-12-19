@@ -21,6 +21,7 @@ namespace uno_game
         private List<TextBox> ltb = new List<TextBox>();
         private GameFrame gf;
 
+        private Logging log = new Logging();
 
         public StartingPage(GameFrame a_gf)
         {
@@ -75,8 +76,25 @@ namespace uno_game
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.label1.Text = this.gf.Ctrl.GetInfos(this.tbxip.Text, this.gf.Ctrl.GetLocalIp());
+            List<Player> players = new List<Player>();
+            players = Serial.Deserialize<List<Player>>(this.gf.Ctrl.GetInfos(this.tbxip.Text, this.gf.Ctrl.GetLocalIp(),"Players"));
 
+            try
+            {
+                log.Log(this.gf.Ctrl.GetInfos(this.tbxip.Text, this.gf.Ctrl.GetLocalIp(), "Players"));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            Console.WriteLine(players.Count);
+        }
+
+        private void btnLog_Click(object sender, EventArgs e)
+        {
+            log.Show();
         }
     }
 }

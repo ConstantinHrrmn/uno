@@ -105,7 +105,7 @@ namespace uno_game
                 Size = s,
                 Location = p,
                 BorderStyle = BorderStyle.None,
-                BackgroundImage = c.Photo,
+                BackgroundImage = c.GetPicture(),
                 BackgroundImageLayout = ImageLayout.Zoom,
                 Tag = c
             };
@@ -117,7 +117,7 @@ namespace uno_game
 
         public void UpdateMainStack(Card card_to_display)
         {
-            this.pbMainStack.BackgroundImage = card_to_display.Photo;
+            this.pbMainStack.BackgroundImage = card_to_display.GetPicture();
         }
 
         private void card_Click(object sender, EventArgs e)

@@ -19,9 +19,14 @@ namespace uno_game
             this.Cards = new List<Card>();
         }
 
+        public Player()
+        {
+
+        }
+
         public string Name { get => _name; set => _name = value; }
         public string IP { get => _iP; set => _iP = value; }
-        internal List<Card> Cards { get => _cards; set => _cards = value; }
+        public List<Card> Cards { get => _cards; set => _cards = value; }
 
         public override string ToString()
         {
