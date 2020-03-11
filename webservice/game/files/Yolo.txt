@@ -1,0 +1,1 @@
+{"players":[{"name":"Player 1","ip":"10.4.43.21","cards":[]}],"deck":[],"played":[],"player turn":0,"direction":0}

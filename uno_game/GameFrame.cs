@@ -38,8 +38,6 @@ namespace uno_game
             if (st.ShowDialog() == DialogResult.Cancel)
                 this.Close();
 
-            this.Ctrl.DebugPlayers();
-
             this.pbMainStack.Location = new Point(this.Bounds.Width / 2 - this.pbMainStack.Width / 2, this.pbMainStack.Location.Y);
 
             this.Ctrl.PutFirstCardOnStack();
@@ -79,6 +77,16 @@ namespace uno_game
                 x += CARDS_SPACEMENT;
                 cpt++;
             }
+        }
+
+        public void DisplayClear()
+        {
+            foreach (PictureBox item in tmpPB)
+            {
+                this.Controls.Remove(item);
+            }
+
+            this.tmpPB.Clear();
         }
 
         public int GetXPosition(int maxCardsOnRaw, int center, int countCardsToDisplay, Player p)
@@ -185,7 +193,6 @@ namespace uno_game
             {
                 this.ChoosenColor.BackColor = c;
             }
-            
         }
     }
 }

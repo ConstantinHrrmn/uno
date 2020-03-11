@@ -21,34 +21,10 @@ namespace uno_game
         private List<TextBox> ltb = new List<TextBox>();
         private GameFrame gf;
 
-        private Logging log = new Logging();
-
         public StartingPage(GameFrame a_gf)
         {
             InitializeComponent();
             gf = a_gf;
-
-            this.lblIp.Text = "Your IP: " + this.gf.Ctrl.GetLocalIp();
-
-        }
-
-        private void VerifyButon()
-        {
-
-        }
-
-        private void BtnStart_Click(object sender, EventArgs e)
-        {        
-
-        }
-
-        private void StartingPage_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void PbTitle_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void tbx_click(object sender, EventArgs e)
@@ -57,44 +33,16 @@ namespace uno_game
             tbx.SelectAll();
         }
 
-        private void btnCreateServer_Click(object sender, EventArgs e)
+        private void btnStart_Click_1(object sender, EventArgs e)
         {
-            this.gf.Ctrl.CreateServer();
-
-            gf.Ctrl.CreatePlayers(0);
-
+            gf.Ctrl.CreatePlayers(Convert.ToInt32(nudPlayer.Value));
             this.DialogResult = DialogResult.OK;
-
             this.Close();
         }
 
-        private void btnConnectServer_Click(object sender, EventArgs e)
+        private void StartingPage_Load(object sender, EventArgs e)
         {
-            this.gf.Ctrl.Connect(this.tbxip.Text, "newPlayer;Computer 1;"+this.gf.Ctrl.GetLocalIp());
-            this.gf.Ctrl.CreateServer();
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<Player> players = new List<Player>();
-            players = Serial.Deserialize<List<Player>>(this.gf.Ctrl.GetInfos(this.tbxip.Text, this.gf.Ctrl.GetLocalIp(),"Players"));
-
-            try
-            {
-                log.Log(this.gf.Ctrl.GetInfos(this.tbxip.Text, this.gf.Ctrl.GetLocalIp(), "Players"));
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            Console.WriteLine(players.Count);
-        }
-
-        private void btnLog_Click(object sender, EventArgs e)
-        {
-            log.Show();
         }
     }
 }

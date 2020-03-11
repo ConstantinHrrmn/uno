@@ -17,7 +17,6 @@ namespace uno_game
         private List<Player> _players;
         private List<Card> _stack;
         private GameFrame _gF;
-        private Server _serv;
 
         private int plusToGiveToNextPlayer = 0;
 
@@ -51,14 +50,10 @@ namespace uno_game
         /// Creating the players and the IA's
         /// </summary>
         /// <param name="IA_amount">The amount of IA to create</param>
-        public void CreatePlayers(int IA_amount)
+        public void CreatePlayers(int players)
         {
-            // Creating the player
-            this.Players.Add(new Player("Player", this.GetLocalIp()));
-
-            // Creating all the IA's
-            //for (int i = 0; i < IA_amount; i++)
-            // this.Players.Add(new IA("IA " + i));
+            for (int i = 0; i < players; i++)
+                this.Players.Add(new Player("Player " + i, "-"));
 
             // Make the real player as the first player
             this.ActualPlayer = this.Players.First();
@@ -69,6 +64,7 @@ namespace uno_game
 
             // Displaying the player on the game frame
             this.GF.DisplayPlayer(this.ActualPlayer);
+            this.DebugPlayers();
         }
 
         public void CreatePlayer(string name, string ip)
@@ -110,7 +106,10 @@ namespace uno_game
                 }
             }
 
+            this.GF.DisplayClear();
+            this.GF.ShowMessage("NEXT PLAYER ("+this.ActualPlayer.Name+")" );
             this.GF.DisplayPlayer(this.ActualPlayer);
+
             Console.WriteLine("NEXT PLAYER !");
         }
 
@@ -186,6 +185,8 @@ namespace uno_game
         {
             if (unoRules.isMovePossible(this.Stack.Last(), cardToPlay))
             {
+                this.GF.ChangeChoosenColor(Color.Teal);
+
                 this.Stack.Add(cardToPlay);
                 this.ActualPlayer.Cards.Remove(cardToPlay);
 
@@ -199,8 +200,6 @@ namespace uno_game
                     this.SkipPlayer();
                 else
                     this.NextPlayer();
-
-                this.GF.ChangeChoosenColor(Color.Teal);
             }
             else
                 this.GF.ShowMessage("Vous ne pouvez pas jouer cette carte");
@@ -247,11 +246,8 @@ namespace uno_game
         {
             if (this.Stack.Last().isChangementCouleur())
             {
-                if (this.ActualPlayer.Name == "Player")
-                {
-                    this.Stack.Last().Color = this.GF.ShowColorChooser();
-                    this.GF.ChangeChoosenColor(this.Stack.Last().Color);
-                }
+                this.Stack.Last().Color = this.GF.ShowColorChooser();
+                this.GF.ChangeChoosenColor(this.Stack.Last().Color);
 
                 Console.WriteLine("Color chossen : " + this.Stack.Last().Color.ToString());
             }
@@ -267,11 +263,8 @@ namespace uno_game
             }
             else if (this.Stack.Last().isPlus4())
             {
-                if (this.ActualPlayer.Name == "Player")
-                {
                     this.Stack.Last().Color = this.GF.ShowColorChooser();
                     this.GF.ChangeChoosenColor(this.Stack.Last().Color);
-                }
             }
         }
 
@@ -331,109 +324,6 @@ namespace uno_game
 
         #endregion
 
-        #region SERVER / CLIENT
-
-        public void CreateServer()
-        {
-            Thread t = new Thread(delegate ()
-            {
-                // replace the IP with your system IP Address...
-                this.Serv = new Server(this.GetLocalIp(), 13000, this);
-            });
-            t.Start();
-
-            Console.WriteLine("Server Started...!");
-        }
-
-        public string GetLocalIp()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
-
-        public void SendMessage(String server, String message)
-        {
-            try
-            {
-                Int32 port = 13000;
-                TcpClient client = new TcpClient(server, port);
-
-                NetworkStream stream = client.GetStream();
-
-
-                // Translate the Message into ASCII.
-                Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
-
-                // Send the message to the connected TcpServer. 
-                stream.Write(data, 0, data.Length);
-                Console.WriteLine("Sent: {0}", message);
-
-                stream.Close();
-                client.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: {0}", e);
-            }
-        }
-
-        public void Connect(string ip, string name)
-        {
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                SendMessage(ip, name);
-            }).Start();
-        }
-
-        public string GetInfos(string server, string clientIp, string message)
-        {
-            try
-            {
-                Int32 port = 13000;
-                TcpClient client = new TcpClient(server, port);
-                NetworkStream stream = client.GetStream();
-
-                // Translate the Message into ASCII.
-                Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
-
-                // Send the message to the connected TcpServer. 
-                stream.Write(data, 0, data.Length);
-                Console.WriteLine("Sent: {0}", message);
-
-                // Bytes Array to receive Server Response.
-                data = new Byte[1000];
-                String response = String.Empty;
-                // Read the Tcp Server Response Bytes.
-                Int32 bytes = stream.Read(data, 0, data.Length);
-                response = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                Console.WriteLine("Received: {0}", response);
-
-                stream.Close();
-                client.Close();
-
-                return response;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: {0}", e);
-
-            }
-
-            return "ERROR";
-        }
-
-
-
-        #endregion
-
         internal List<Card> Deck { get => _deck; set => _deck = value; }
         internal List<Player> Players { get => _players; set => _players = value; }
         public List<Card> Stack { get => _stack; set => _stack = value; }
@@ -442,6 +332,5 @@ namespace uno_game
         public GameFrame GF { get => _gF; set => _gF = value; }
 
         public Player ActualPlayer { get => _actualPlayer; set => _actualPlayer = value; }
-        internal Server Serv { get => _serv; set => _serv = value; }
     }
 }

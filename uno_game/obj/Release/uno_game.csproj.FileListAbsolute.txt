@@ -1,0 +1,10 @@
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\bin\Release\uno_game.exe.config
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\bin\Release\uno_game.exe
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\bin\Release\uno_game.pdb
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Release\uno_game.ColorChooser.resources
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Release\uno_game.GameFrame.resources
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Release\uno_game.Properties.Resources.resources
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Release\uno_game.StartingPage.resources
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Release\uno_game.csproj.GenerateResource.cache
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Release\uno_game.exe
+C:\Users\Constantin\Documents\GitHub\uno\uno_game\obj\Release\uno_game.pdb

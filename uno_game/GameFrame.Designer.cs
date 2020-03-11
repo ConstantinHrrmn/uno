@@ -90,6 +90,7 @@
             this.MaximizeBox = false;
             this.Name = "GameFrame";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UNO";
             this.Load += new System.EventHandler(this.GameFrame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbMainStack)).EndInit();
