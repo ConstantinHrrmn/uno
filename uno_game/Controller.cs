@@ -121,6 +121,9 @@ namespace uno_game
             this.NextPlayer();
         }
 
+        /// <summary>
+        /// Mise à jour des status de la partie
+        /// </summary>
         private void UpdateStatus()
         {
             string status = "";
@@ -139,11 +142,9 @@ namespace uno_game
             }
             this.GF.UpdateStatus(status);
         }
-
         #endregion
 
         #region CARDS MANAGEMENT
-
         /// <summary>
         /// Give an amount of card to a certain player
         /// </summary>
@@ -334,8 +335,6 @@ namespace uno_game
         {
             return player.Cards.Count == 0;
         }
-
-
         #endregion
 
         #region DEBUGGING
