@@ -63,8 +63,8 @@ namespace uno_game
                 this.GiveCardsToPlayer(CARDS_TO_GIVE_AT_BEGINNING, player);
 
             // Displaying the player on the game frame
+            this.GF.ShowMessage("PLAYER (" + this.ActualPlayer.Name + ") STARTS");
             this.GF.DisplayPlayer(this.ActualPlayer);
-            this.DebugPlayers();
         }
 
         public void CreatePlayer(string name, string ip)
