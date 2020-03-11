@@ -194,5 +194,21 @@ namespace uno_game
                 this.ChoosenColor.BackColor = c;
             }
         }
+
+        public void UpdateStatus(string text)
+        {
+            this.lblStatus.Text = text;
+        }
+
+        public void ShowWinner(Player player)
+        {
+            this.DisplayClear();
+            this.pbPicDeck.Visible = false;
+            this.pbMainStack.Visible = false;
+            this.ChoosenColor.Visible = false;
+            lblPlus.Visible = false;
+            this.lblWinner.Visible = true;
+            this.lblWinner.Text = "THE WINNER IS : " + player.Name;
+        }
     }
 }

@@ -62,19 +62,11 @@ namespace uno_game
             foreach (Player player in this.Players)
                 this.GiveCardsToPlayer(CARDS_TO_GIVE_AT_BEGINNING, player);
 
+            this.UpdateStatus();
+
             // Displaying the player on the game frame
             this.GF.ShowMessage("PLAYER (" + this.ActualPlayer.Name + ") STARTS");
             this.GF.DisplayPlayer(this.ActualPlayer);
-        }
-
-        public void CreatePlayer(string name, string ip)
-        {
-            Player p = new Player(name, ip);
-
-            // Creating the player
-            this.Players.Add(p);
-
-            this.GiveCardsToPlayer(CARDS_TO_GIVE_AT_BEGINNING, p);
         }
 
         /// <summary>
@@ -82,6 +74,7 @@ namespace uno_game
         /// </summary>
         public void NextPlayer()
         {
+            this.UpdateStatus();
             int indexOfPlayer = this.Players.IndexOf(this.ActualPlayer);
             indexOfPlayer++;
 
@@ -126,6 +119,25 @@ namespace uno_game
 
             this.ActualPlayer = this.Players[indexOfPlayer];
             this.NextPlayer();
+        }
+
+        private void UpdateStatus()
+        {
+            string status = "";
+            foreach (Player player in this.Players)
+            {
+                string txt = "";
+                if (player.Cards.Count == 1)
+                {
+                    txt = "UNO";
+                }
+                else
+                {
+                    txt = player.Cards.Count.ToString();
+                }
+                status += player.Name + " : " + txt + "\n";
+            }
+            this.GF.UpdateStatus(status);
         }
 
         #endregion
@@ -190,11 +202,20 @@ namespace uno_game
                 this.Stack.Add(cardToPlay);
                 this.ActualPlayer.Cards.Remove(cardToPlay);
 
+                this.UpdateStatus();
+
+                if (this.CheckIfWin(this.ActualPlayer)){
+                    this.GF.ShowWinner(this.ActualPlayer);
+                    return;
+                }
+
                 this.GF.UpdateMainStack(this.Stack.Last());
                 this.GF.DisplayPlayer(this.ActualPlayer);
 
                 if (this.IsTheCardSpecial(cardToPlay))
                     this.ManageSpecialCard();
+
+                
 
                 if (cardToPlay.isSauterTour())
                     this.SkipPlayer();
@@ -304,10 +325,16 @@ namespace uno_game
             return canpPlay;
         }
 
-        public int PlusToGiveToNextlayer()
+        /// <summary>
+        /// Checks if the player still has cards or not
+        /// </summary>
+        /// <param name="player">the player we want to check</param>
+        /// <returns>true if win, false if not</returns>
+        private bool CheckIfWin(Player player)
         {
-            return this.plusToGiveToNextPlayer;
+            return player.Cards.Count == 0;
         }
+
 
         #endregion
 

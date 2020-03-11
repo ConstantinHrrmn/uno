@@ -32,6 +32,8 @@
             this.pbPicDeck = new System.Windows.Forms.PictureBox();
             this.lblPlus = new System.Windows.Forms.Label();
             this.ChoosenColor = new System.Windows.Forms.Panel();
+            this.lblWinner = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMainStack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicDeck)).BeginInit();
             this.SuspendLayout();
@@ -70,10 +72,32 @@
             // 
             // ChoosenColor
             // 
-            this.ChoosenColor.Location = new System.Drawing.Point(627, 149);
+            this.ChoosenColor.Location = new System.Drawing.Point(1157, 189);
             this.ChoosenColor.Name = "ChoosenColor";
-            this.ChoosenColor.Size = new System.Drawing.Size(182, 34);
+            this.ChoosenColor.Size = new System.Drawing.Size(36, 268);
             this.ChoosenColor.TabIndex = 3;
+            // 
+            // lblWinner
+            // 
+            this.lblWinner.AutoSize = true;
+            this.lblWinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWinner.ForeColor = System.Drawing.Color.White;
+            this.lblWinner.Location = new System.Drawing.Point(378, 450);
+            this.lblWinner.Name = "lblWinner";
+            this.lblWinner.Size = new System.Drawing.Size(679, 55);
+            this.lblWinner.TabIndex = 4;
+            this.lblWinner.Text = "THE WINNER IS : PLAYER 1";
+            this.lblWinner.Visible = false;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.ForeColor = System.Drawing.Color.White;
+            this.lblStatus.Location = new System.Drawing.Point(12, 9);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 26);
+            this.lblStatus.TabIndex = 5;
             // 
             // GameFrame
             // 
@@ -81,6 +105,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(1450, 912);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.lblWinner);
             this.Controls.Add(this.ChoosenColor);
             this.Controls.Add(this.lblPlus);
             this.Controls.Add(this.pbPicDeck);
@@ -106,6 +132,8 @@
         private System.Windows.Forms.PictureBox pbPicDeck;
         private System.Windows.Forms.Label lblPlus;
         private System.Windows.Forms.Panel ChoosenColor;
+        private System.Windows.Forms.Label lblWinner;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 
